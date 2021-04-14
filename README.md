@@ -78,7 +78,7 @@ Html | HTML portion of the message.
 Text | Text portion of the message.
 Content | An array of `amply.Content{}` structs containing the following fields: `Type` (required), `Value` (required).
 Template | The template to use. This may be a string (the UUID of the template), an array of UUID strings (useful for A/B/... testing where one is randomly selected), or a map of the format `map[string]float{"template1Uuid": 0.25, "template2Uuid": 0.75}` (useful for weighted A/B/... testing).
-DynamicTemplateData | The dynamic data to be replaced in your template.  This is a map of the format `map[string]string{"variable1": "replacement1", ...}`. Variables should be defined in your template body as `${variable1}`.
+DynamicTemplateData | The dynamic data to be replaced in your template.  This is a map of the format `map[string]string{"variable1": "replacement1", ...}`. Variables should be defined in your template body using handlebars syntax `{{variable1}}`.
 ReplyTo |Email address of who should receive replies.  This may be a string or an amply.EmailAddress with `Name` (optional) and `Email` (required) fields.
 Headers | A `map[string]string` where the header name is the key and header value is the value.
 IpOrPoolUuid | The UUID string of the IP address or IP pool you want to send from.  Default is your Global pool.

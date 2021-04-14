@@ -22,7 +22,7 @@ type EmailData struct {
 	Content              []Content              `json:"content,omitempty"`
 	ReplyTo              interface{}            `json:"reply_to,omitempty"`
 	Template             interface{}            `json:"template,omitempty"`
-	DynamicTemplateData  map[string]string      `json:"-"`
+	DynamicTemplateData  map[string]string      `json:"dynamic_template_data,omitempty"`
 	Substitutions        map[string]string      `json:"substitutions,omitempty"`
 	UnsubscribeGroupUuid string                 `json:"unsubscribe_group_uuid,omitempty"`
 	IpOrPoolUuid         string                 `json:"ip_or_pool_uuid,omitempty"`
@@ -240,12 +240,10 @@ func setDynamicTemplateData(e *EmailData, dynamicTemplateData map[string]string)
 		return nil
 	}
 
-	if e.Substitutions == nil {
-		e.Substitutions = map[string]string{}
-	}
+	e.DynamicTemplateData = map[string]string{}
 
-	for subFrom, subTo := range dynamicTemplateData {
-		e.Substitutions["${"+subFrom+"}"] = subTo
+	for k, v := range dynamicTemplateData {
+		e.DynamicTemplateData[k] = v
 	}
 
 	return nil
