@@ -92,6 +92,7 @@ Attachments[][ContentId] | The content ID of your attachment (string).
 Clicktracking | Enable or disable clicktracking (bool).
 Categories | A `[]string` of email categories you can associate with your message.
 Substitutions | A `map[string]string` of the format `map[string]string{"subFrom": "subTo", ...}` of substitutions.
+SendAt | Delay sending until a specified time. An ISO8601 formatted string with timezone information.
 
 __Example__
 
@@ -124,5 +125,6 @@ amply.Email.Create(amply.EmailData{
         Categories: []string{"Test"},
         Clicktracking: true,
         Substitutions: map[string]string{"sub1": "replacement1"},
+        SendAt: "2021-06-23T15:09:09-07:00",
 })
 ```

@@ -26,6 +26,7 @@ type EmailData struct {
 	Substitutions        map[string]string      `json:"substitutions,omitempty"`
 	UnsubscribeGroupUuid string                 `json:"unsubscribe_group_uuid,omitempty"`
 	IpOrPoolUuid         string                 `json:"ip_or_pool_uuid,omitempty"`
+	SendAt               string                 `json:"send_at,omitempty"`
 	Attachments          []Attachment           `json:"attachments,omitempty"`
 	Headers              map[string]string      `json:"headers,omitempty"`
 	Categories           []string               `json:"-"`
@@ -103,6 +104,10 @@ func parseEmailData(data EmailData) (EmailData, error) {
 	}
 
 	if err := setIpOrPoolUuid(&emailData, data.IpOrPoolUuid); err != nil {
+		return emailData, err
+	}
+
+	if err := setSendAt(&emailData, data.SendAt); err != nil {
 		return emailData, err
 	}
 
@@ -260,6 +265,11 @@ func setUnsubscribeGroupUuid(e *EmailData, unsubscribeGroupUuid string) error {
 
 func setIpOrPoolUuid(e *EmailData, ipOrPoolUuid string) error {
 	e.IpOrPoolUuid = ipOrPoolUuid
+	return nil
+}
+
+func setSendAt(e *EmailData, SendAt string) error {
+	e.SendAt = SendAt
 	return nil
 }
 
